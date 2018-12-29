@@ -108,7 +108,7 @@ def removeNull(urlList):
 
 
 # //转换
-def changeLink1(urlList):
+def changeLink1(urlList,head):
     headList4 = []  # 用来记录索引位置到末尾到距离    //开头的链接
     length = len(urlList)
     count = 0
@@ -122,7 +122,7 @@ def changeLink1(urlList):
     for i in headList4:
         i = int(i)
         length = len(urlList)
-        urlList[length - i] = GHeaders  +  urlList[length-i]
+        urlList[length - i] = head  +  urlList[length-i]
     removeNull(urlList)  # 去掉空值
     return urlList
 
@@ -132,7 +132,7 @@ def changeLink2(urlList,url,head,name):
     length = len(urlList)
     count = 0
     for count in range(0, length):
-        if (urlList[count][0] == '/' and urlList[count][1] != '/'):  # /开头的链接转换
+        if (urlList[count][0] == '/' and urlList[count][1] != '/'):  # /开头的链接
             headList2.append(length - count)  # 记录当前索引位置到末尾到距离
             count = count + 1
         else:
@@ -361,9 +361,13 @@ def urllistCheck(urlList):
 # 末尾加/
 def addTail(url):
     lastValue = url[len(url)-1]
+    ul = url.split('/')
+    value = ul[len(ul)-1]
     if lastValue == '#':
         url = url[0:len(url)-1]
     elif lastValue == '/':
+        pass
+    elif('.' in value):
         pass
     else:
         url = url + '/'
@@ -405,11 +409,7 @@ def getHead(url):
 
 
 if __name__ =='__main__':
-    # a = ['xueshengdati.png','jiazhang.png','qrcode.png']
-    # u = 'http://hdkt.ahzhxy.com/ad/'
-    # print(changeLink5(a,u,'http:'))
-    # # print(a)
-    # urllistCheck(a)
+
     a=['loginImages/timg.png','/captcha/LifSKUVKaxRptog.png','lib/jquery.form.js','/action/findpwd.html']
     u = 'https://www.5169888.com/action/login.jsp'
     print(a)
